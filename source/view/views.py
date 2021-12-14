@@ -74,7 +74,7 @@ def construct_view(type: str) -> View:
     views = {
         "main" : MainMenuView(),
         "search_view" : SearchView(),
-        "list_view" : SearchView()
+        "list_view" : ListView()
     }
     return views[type]
 

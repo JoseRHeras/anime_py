@@ -1,6 +1,6 @@
 # The following program makes use of the KitsuAPI for all endpoint requests
 import json
-from config.utilities import retrive_current_season
+from source.utilities import retrive_current_season
 
 # Load base url
 with open('data.json', 'r') as file:

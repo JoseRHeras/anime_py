@@ -14,6 +14,10 @@
         "search_view": {
             "1" : ["Select the view you wish to see more", "list_view"],
             "exit": ["Enter exit to go back to previous"]
+        },
+        "list_view": {
+            "1" : ["Enter the ID of the anime you wish to see more detailed data"],
+            "exit" : ["Enter exit to go back to previous"]
         }
     },
 
@@ -27,7 +31,7 @@
         "summer" : [7, 8, 9],
         "fall" : [10, 10, 12]
     },
-
+    
     "cmd_data" : {
         "1list_view" : ["season", "list_view" ] 
     }

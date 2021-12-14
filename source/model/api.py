@@ -1,6 +1,6 @@
 import json
 import requests
-from endpoints import CURRENT_ANIMES
+from source.endpoints import CURRENT_ANIMES
 
 class API:
 
