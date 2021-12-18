@@ -2,7 +2,7 @@
     "messages" : {
         "welcome_msg": "Console anime welcomes you",
         "main_menu": {
-            "1": ["Display recent anime", "list_view"],
+            "1": ["Display recent anime", "list_view", "season"],
             "2": ["Search", "search_view"],
             "3": ["Recomendations", "reco"],
             "4": ["Display My Watchlist", "list_view"],
@@ -16,9 +16,13 @@
             "exit": ["Enter exit to go back to previous"]
         },
         "list_view": {
-            "1" : ["Enter the ID of the anime you wish to see more detailed data"],
+            "1" : ["Enter the ID of the anime you wish to see more detailed data", "detailed_view"],
             "exit" : ["Enter exit to go back to previous"]
         }
+    },
+
+    "commands_mapping" : {
+        "1list_view" : "season+list_view"
     },
 
     "endpoint" : {
@@ -30,9 +34,5 @@
         "spring" : [4, 5, 6],
         "summer" : [7, 8, 9],
         "fall" : [10, 10, 12]
-    },
-    
-    "cmd_data" : {
-        "1list_view" : ["season", "list_view" ] 
     }
 }

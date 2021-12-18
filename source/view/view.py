@@ -14,6 +14,6 @@ class View(ABC):
         pass
 
     @abstractmethod
-    def screen_options(self) -> Dict:
+    def available_options(self) -> Dict:
         """ Returns valid inputs for the following view """
         pass

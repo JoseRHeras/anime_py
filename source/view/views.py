@@ -27,9 +27,11 @@ class MainMenuView(View):
         options = build_string_from_dict(self.options)
         return f"{data}\n{options}"
 
-    def screen_options(self) -> Dict:
+    def available_options(self) -> Dict:
         return self.options
 
+    def transform_into_string(self) -> str:
+        return ""
 
 class SearchView(View):
     def __init__(self) -> None:
@@ -45,26 +47,42 @@ class SearchView(View):
         options = build_string_from_dict(self.options)
         return f"{data}\n{options}"
 
-    def screen_options(self) -> Dict:
+    def available_options(self) -> Dict:
         return self.options
+
+    def transform_into_string(self) -> str:
+        return ""
 
 
 class ListView(View):
     def __init__(self) -> None:
         self.id: str = "list_view"
         self.options: Dict = data["list_view"]
-        self.content: List = ["List of Animes"]
+        self.content: List = []
+
+    def content_to_string(self) -> str:
+        content = ""
+        for index, item in enumerate(self.content):
+            
+            content += f"{index + 1}: {item[0]}\n"
+            
+        return content
+        
 
     def update_view(self, content: List) -> None:
         self.content = content
 
     def make_screen(self) -> str:
-        data = build_string_from_list(self.content)
-        options = build_string_from_dict(self.options)
-        return f"{data}\n{options}"
+        options_str = build_string_from_dict(self.options)
+        content_str = self.content_to_string()
+        return f"{content_str}\n{options_str}"
+    
+    
 
-    def screen_options(self) -> Dict:
+    def available_options(self) -> Dict:
         return self.options
+
+    
 
 
 

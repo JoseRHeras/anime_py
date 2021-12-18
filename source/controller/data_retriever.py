@@ -8,30 +8,27 @@ from typing import Dict, List
 class DataRetriever:
 
     def __init__(self) -> None:
-        self.__load_cmd_data()
+        self.__load_commands_mapping()
         self.api: API = API()
         self.function_map: Dict = {
             "season+list_view": self.get_season_anime
         }
-        self.operation = None 
+        self.active_function = None 
 
-    def __load_cmd_data(self):
+    def __load_commands_mapping(self):
         with open("data.json", "r") as file:
             data = json.load(file)
-            self.cmd_data = data['cmd_data']
+            self.commands_mapping = data['commands_mapping']
 
 
-    def get_season_anime(self, season:str=None):
-        if not season:
-            return ['Current Season Animes', "Will be displayed here", "No matter what you think"]
-        
-        return ['Current Season Animes', "Will be displayed here"]
+    def get_season_anime(self) -> List:
+        data = self.api.get_current_season_animes()
+        return data
 
 
-    def load_commands(self, cmd: List) -> None:
-        key = "".join([str(x) for x in cmd])
-        function_key = f"{self.cmd_data[key][0]}+{self.cmd_data[key][1]}"
-        self.operation = self.function_map[function_key]
+    def load_parameters(self, parameters: List) -> None:
+        key = parameters[0]
+        self.active_function = self.function_map[self.commands_mapping[key]]
         
     def get_data(self):
-        return self.operation()
+        return self.active_function()
