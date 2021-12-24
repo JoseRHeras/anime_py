@@ -32,3 +32,4 @@ class DataRetriever:
         
     def get_data(self):
         return self.active_function()
+

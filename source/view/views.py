@@ -83,10 +83,7 @@ class ListView(View):
         return self.options
 
     
-
-
-
-
+# Factory for view
 def construct_view(type: str) -> View:
     
     views = {
