@@ -2,6 +2,7 @@ import json
 
 from source.model.api import API
 from typing import Dict, List
+from source.model.anime_library import AnimeLibrary
 
 
 
@@ -10,6 +11,7 @@ class DataRetriever:
     def __init__(self) -> None:
         self.__load_commands_mapping()
         self.api: API = API()
+        self.anime_library: AnimeLibrary = AnimeLibrary()
         self.function_map: Dict = {
             "season+list_view": self.get_season_anime
         }
@@ -22,7 +24,7 @@ class DataRetriever:
 
 
     def get_season_anime(self) -> List:
-        data = self.api.get_current_season_animes()
+        data = self.anime_library.current_season_animes()
         return data
 
 

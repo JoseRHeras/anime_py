@@ -1,29 +1,14 @@
 import requests
-# from source.endpoints import CURRENT_ANIMES
+from typing import Any, List
 
-dummy_data = {
-    "current_animes" : [
-        ["Title number 1", "ID"],
-        ["Title number 1", "ID"],
-        ["Title number 1", "ID"],
-        ["Title number 1", "ID"],
-        ["Title number 1", "ID"],
-        ["Title number 1", "ID"],
-        ["Title number 1", "ID"],
-        ["Title number 1", "ID"],
-        ["Title number 1", "ID"],
-        ["Title number 1", "ID"],
-        ["Title number 1", "ID"]
-    ]
-}
 
 class API:
 
-    def get_current_season_animes(self):
+    def get_current_season_animes(self) -> List:
         endpoint = "https://kitsu.io/api/edge/anime?filter[status]=current"
-        animes = []
+        animes: List = []
         while True:
-            data = requests.get(endpoint)
+            data: Any = requests.get(endpoint)
             data = data.json()
             animes = animes + data['data']
 
@@ -31,7 +16,7 @@ class API:
 
             endpoint = data['links']['next']
             
-        return data
+        return animes
 
     def fetch_data_from(self, link):
         pass

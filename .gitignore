@@ -109,3 +109,4 @@ cython_debug/
 
 #Others
 tes.py
+api_saves.json
