@@ -1,5 +1,5 @@
 from source.view.view import View
-from typing import Dict, List
+from typing import List
 from source.utilities import clear_cmd_screen
 from source.view.views import construct_view
 from source.controller.data_retriever import DataRetriever
@@ -8,7 +8,7 @@ from source.controller.data_retriever import DataRetriever
 class AnimeConsole:
 
     def __init__(self) -> None:
-        self.stack_memory = ViewStackMemory()
+        self.view_memory = ViewMemory()
         self.data_retriever: DataRetriever = DataRetriever()
 
         self._initialize_first_view()
@@ -32,8 +32,7 @@ class AnimeConsole:
         self.view.update_view(data)
     
     def _save_current_view_in_stack(self) -> None:
-        
-        self.stack_memory.append(self.view)
+       self.view_memory.append(self.view)
 
     
     def _generate_view_key(self, user_input:str) -> str:
@@ -58,22 +57,25 @@ class AnimeConsole:
 
         if user_input == "exit":
             
-            if self.stack_memory.is_empty():
+            if self.view_memory.is_empty():
                 # Terminate the program
                 self.terminate_loop = True
                 return
             #Load saved view
-            self.view, self.data = self.stack_memory.retrieve()
+            self.view, self.data =self.view_memory.retrieve()
                
         else:
             self._update_state_with_user_input(user_input=user_input)
 
 
 
-class ViewStateManager:
-    pass
+class ViewManager:
+    
+    def __init__(self) -> None:
+        self.view: View = View
 
-class ViewStackMemory:
+
+class ViewMemory:
 
     def __init__(self) -> None:
         self.memoryStack: List = []

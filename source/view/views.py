@@ -1,5 +1,6 @@
 from abc import ABC
 import json
+from source.model.data_models import Show
 from source.view.view import View
 from typing import Dict, List
 from source.utilities import build_string_from_list, build_string_from_dict
@@ -7,8 +8,6 @@ from source.utilities import build_string_from_list, build_string_from_dict
 with open("data.json", 'r') as f:
     data = json.load(f)
     data = data['messages']
-
-
 
 
 
@@ -60,27 +59,27 @@ class ListView(View):
         self.options: Dict = data["list_view"]
         self.content: List = []
 
-    def content_to_string(self) -> str:
+    def __content_to_string(self) -> str:
         content = ""
         for index, item in enumerate(self.content):
-            
-            content += f"{index + 1}: {item[0]}\n"
+            content += f"{index + 1}: {item[1]}\n"
             
         return content
         
-
     def update_view(self, content: List) -> None:
         self.content = content
 
     def make_screen(self) -> str:
         options_str = build_string_from_dict(self.options)
-        content_str = self.content_to_string()
+        content_str = self.__content_to_string()
         return f"{content_str}\n{options_str}"
     
     
 
     def available_options(self) -> Dict:
         return self.options
+
+
 
     
 # Factory for view
