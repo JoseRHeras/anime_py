@@ -12,9 +12,10 @@ class DataRetriever:
         self.mapper = APICallsFunctionManager()
 
     def load_parameters(self, parameters: List) -> None:
-        self.mapper.set_active_function_with(parameters=parameters)
+        key = "+".join(parameters)
+        self.mapper.set_active_function_with(key=key)
         
-    def get_data(self):
+    def get_data(self) -> List:
         return self.mapper.make_call_and_get_data()
 
 
@@ -37,9 +38,8 @@ class APICallsFunctionManager:
         data = self.anime_library.current_season_animes()
         return data
 
-    def set_active_function_with(self, parameters: List) -> None:
-        key = parameters[0]
-        self.active_function = self.function_map[self.commands_mapping[key]]
+    def set_active_function_with(self, key:str) -> None:
+        self.active_function = self.function_map[key]
 
     def make_call_and_get_data(self):
         return self.active_function()

@@ -2,22 +2,19 @@
     "messages" : {
         "welcome_msg": "Console anime welcomes you",
         "main_menu": {
-            "1": ["Display recent anime", "list_view", "season"],
+            "1": ["Display recent anime", ["season", "list_view"]],
             "2": ["Search", "search_view"],
             "3": ["Recomendations", "reco"],
             "4": ["Display My Watchlist", "list_view"],
-            "exit": ["Exit console"]
+            "exit": ["Exit console", ["", "exit"]]
         },
         "season_menu": {
             "1" : "View more enter index: "
         },
-        "search_view": {
-            "1" : ["Select the view you wish to see more", "list_view"],
-            "exit": ["Enter exit to go back to previous"]
-        },
+
         "list_view": {
             "1" : ["Enter the ID of the anime you wish to see more detailed data", "detailed_view"],
-            "exit" : ["Enter exit to go back to previous"]
+            "exit" : ["Enter exit to go back to previous", ["", "exit"]]
         }
     },
 

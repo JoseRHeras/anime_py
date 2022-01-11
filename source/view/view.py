@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from typing import Dict, List
+from typing import Dict, List, Tuple
 
 class View(ABC):
 
@@ -16,4 +16,9 @@ class View(ABC):
     @abstractmethod
     def available_options(self) -> Dict:
         """ Returns valid inputs for the following view """
+        pass
+
+    @abstractmethod
+    def get_user_input(self) -> List[str]:
+        """ Returns a tupple"""
         pass
