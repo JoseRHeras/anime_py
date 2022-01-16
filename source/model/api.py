@@ -1,7 +1,7 @@
 import requests
 from typing import Any, List
 from source.model.data_models import Show, parse_to_show_object
-
+from source.endpoints import CURRENT_ANIMES, DETAILED_ANIME
 
 
 class API:
@@ -35,6 +35,15 @@ class API:
             count += 1
                
         return parse_data_to_list(animes)
+
+    def get_detailed_anime_data(self, id:str) -> Show:
+        endpoint = f"{DETAILED_ANIME}{id}"
+        try:
+            data = requests.get(url=endpoint)
+            data = data.json()["data"]
+            return parse_to_show_object(data=data)
+        except:
+            return Show()
 
     def fetch_data_from(self, link):
         pass

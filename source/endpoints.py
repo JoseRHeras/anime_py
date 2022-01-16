@@ -10,3 +10,6 @@ with open('data.json', 'r') as file:
 # Current Season Endpoint
 year, season = retrive_current_season()
 CURRENT_ANIMES = f"{BASE_URL}/anime?filter%5Bseason%5D={season}&filter%5BseasonYear%5D={year}"
+
+# Detailed version of an anime
+DETAILED_ANIME = F"{BASE_URL}/anime/"

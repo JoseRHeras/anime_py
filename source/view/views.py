@@ -2,8 +2,8 @@ from abc import ABC
 import json
 from source.model.data_models import Show
 from source.view.view import View
-from typing import Dict, List, Tuple
-from source.utilities import build_string_from_list, build_string_from_dict
+from typing import Any, Dict, List, Tuple
+from source.utilities import build_string_from_dict
 
 with open("data.json", 'r') as f:
     data = json.load(f)
@@ -13,17 +13,19 @@ with open("data.json", 'r') as f:
 class MainMenuView(View):
     
     def __init__(self) -> None:
-        self.id: str = "main"
         self.options: Dict = data['main_menu']
         self.content: List[str] = ["Welcome to Main Screen"]
 
+    def _content_to_string(self) -> str:
+        return "".join([f"{line}\n" for line in self.content])
+        
     def update_view(self, content: List) -> None:
         self.content = content
 
     def make_screen(self) -> str:
-        data = build_string_from_list(self.content)
+        content = self._content_to_string()
         options = build_string_from_dict(self.options)
-        return f"{data}\n{options}"
+        return f"{content}\n{options}"
 
 
     def get_user_input(self) -> List[str]:
@@ -42,12 +44,10 @@ class MainMenuView(View):
 
 class ListView(View):
     def __init__(self) -> None:
-        self.id: str = "list_view"
-        self.maps_to: str = "detailed_view"
         self.options: Dict = data["list_view"]
         self.content: List = []
 
-    def __content_to_string(self) -> str:
+    def _content_to_string(self) -> str:
         content = ""
         for index, item in enumerate(self.content):
             content += f"{index + 1}: {item[1]}\n"
@@ -59,47 +59,76 @@ class ListView(View):
 
     def make_screen(self) -> str:
         options_str = build_string_from_dict(self.options)
-        content_str = self.__content_to_string()
+        content_str = self._content_to_string()
         return f"{content_str}\n{options_str}"
     
-    def _evaluate_content_with_id(self, id: str) -> bool:
-        return False
+    def is_input_valid(self, id: str) -> bool:           #Evaluates if input is a number and within a range
+        if not str.isnumeric(id): return False
+        if int(id) - 1 > len(self.content) - 1 or int(id) < 1: return False
+
+        return True
+
+    def get_id_from_content(self, id: int) -> str:
+
+        for index, item in enumerate(self.content):
+            if index == int(id): 
+                key = item[0]
+                break
+        return key
 
     def get_user_input(self) -> List[str]:
         
         while(True): 
             usr_input = input("Select an option: ")
 
-            is_id_present = self._evaluate_content_with_id(id=usr_input)
-
-            if is_id_present or usr_input == "exit": break
-            
+            if usr_input == "exit": return ["_", "exit"]
+                
+            if self.is_input_valid(id=usr_input):
+                return [ self.get_id_from_content(id=int(usr_input) - 1), "detailed_view"] 
+                
             print(f"Parameters entered does not match an item. Try again!!")
 
-        return self.options[str(usr_input)][1]
-    
+        
     def available_options(self) -> Dict:
         return self.options
 
+
+class DetailedView(View):
+
+    def __init__(self) -> None:
+        self.content: List = []
+        self.options: Dict = data["detailed_view"]
+
+    def _content_to_string(self) -> str:
+        return "".join([f"{line}\n" for line in self.content])
+
+    def update_view(self, content: List) -> None:
+        self.content = content
+
+    def make_screen(self) -> str:
+        page_body = self._content_to_string()
+        page_options = build_string_from_dict(self.options)
+
+        return f"{page_body}\n{page_options}"
+
+    def get_user_input(self) -> List[str]:
+        while True:
+            usr_input:str = input("Select an option: ")
+            if usr_input == "exit": break
+        
+        return self.options[usr_input][1]
     
-# Factory for view
+    def available_options(self) -> Dict:
+        return {}
+    
+        
+
+# View factory function
 def construct_view(type: str) -> View:
     
     views = {
         "main" : MainMenuView(),
-        "list_view" : ListView()
+        "list_view" : ListView(),
+        "detailed_view": DetailedView()
     }
     return views[type]
-
-
-def get_valid_user_input(valid_input: Dict) -> List[str]:
-    
-    user_input = ""
-
-    while(True):
-        user_input = input("Select an option: ")
-        
-        if str(user_input) in valid_input:
-            return valid_input[str(user_input)]
-        
-        print(f"The option {user_input} is not a valid option!!!")

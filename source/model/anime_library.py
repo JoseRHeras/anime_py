@@ -1,5 +1,4 @@
 from dataclasses import asdict
-from os import times
 from typing import Dict, List
 
 from source.model.data_models import Show
@@ -23,8 +22,11 @@ class AnimeLibrary:
 
         return extract_title_and_id_from_data(data=data)
 
+    def detailed_anime(self, anime_id:str) -> List:
+        data = self.api.get_detailed_anime_data(id=anime_id)
+        data = data.list_representation()
+        return data
 
 
 def extract_title_and_id_from_data(data: List[Show]) -> List:
-
     return [[x.title_id, x.canonical_title] for x in data]  

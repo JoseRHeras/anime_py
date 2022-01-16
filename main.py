@@ -1,5 +1,5 @@
 import sys
-from source.controller.anime_console import AnimeConsole, Console
+from source.controller.anime_console import  Console
 
 
 def main() -> None:
