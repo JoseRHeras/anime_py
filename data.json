@@ -1,25 +1,11 @@
 {
-    "messages" : {
-        "welcome_msg": "Console anime welcomes you",
-        "main_menu": {
-            "1": ["Display recent anime", ["season", "list_view"]],
-            "2": ["Search", ["", "search_view"]],
-            "3": ["Recomendations", "reco"],
-            "4": ["Display My Watchlist", "list_view"],
-            "exit": ["Exit console", ["", "exit"]]
-        },
-
-        "list_view": {
-            "1" : ["Enter the ID of the anime you wish to see more detailed data", ["1", "detailed_view"]],
-            "exit" : ["Enter exit to go back to previous", ["", "exit"]]
-        },
-        "detailed_view": {
-            "exit": ["Enter exit to go back to previous", ["", "exit"]]
-        }
-    },
-
-    "commands_mapping" : {
-        "1list_view" : "season+list_view"
+    
+    "main_menu": {
+        "1": ["Display recent anime", ["season", "list_view"]],
+        "2": ["Search", ["", "search_view"]],
+        "3": ["Recomendations", "reco"],
+        "4": ["Display My Watchlist", "list_view"],
+        "exit": ["Exit console", ["", "exit"]]
     },
 
     "endpoint" : {

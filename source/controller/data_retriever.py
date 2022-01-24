@@ -23,7 +23,6 @@ class DataRetriever:
 
 class APICallsFunctionManager:
     def __init__(self) -> None:
-        self.load_commands_mapping()
         self.anime_library: AnimeLibrary = AnimeLibrary()
         self.function_map: Dict = {
             "list_view": self.get_simplified_list_of_seasonal_animes,
@@ -35,10 +34,6 @@ class APICallsFunctionManager:
         self.parameter:str = ""
         self.view_key:str = ""
 
-    def load_commands_mapping(self):
-        with open("data.json", "r") as file:
-            data = json.load(file)
-            self.commands_mapping = data['commands_mapping']
 
     def get_usr_search_data(self) -> List:
         data = self.anime_library.animes_by_search_term(term=self.parameter)
