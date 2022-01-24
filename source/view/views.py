@@ -36,9 +36,6 @@ class MainMenuView(View):
 
         return self.options[str(usr_input)][1]
 
-    def available_options(self) -> Dict:
-        return self.options
-
 
 class ListView(View):
     def __init__(self) -> None:
@@ -87,8 +84,7 @@ class ListView(View):
             print(f"Parameters entered does not match an item. Try again!!")
 
         
-    def available_options(self) -> Dict:
-        return self.options
+
 
 
 class DetailedView(View):
@@ -115,9 +111,7 @@ class DetailedView(View):
             if usr_input == "exit": break
         
         return self.options[usr_input][1]
-    
-    def available_options(self) -> Dict:
-        return {}
+
 
     
 class SearchView(View):
@@ -145,9 +139,6 @@ class SearchView(View):
 
             print("Invalid input! Please try again")
 
-    def available_options(self) -> Dict:
-        """ Returns valid inputs for the following view """
-        return {}
 
 
 # View factory function

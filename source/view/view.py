@@ -14,11 +14,6 @@ class View(ABC):
         pass
 
     @abstractmethod
-    def available_options(self) -> Dict:
-        """ Returns valid inputs for the following view """
-        pass
-
-    @abstractmethod
     def get_user_input(self) -> List[str]:
         """ Returns a list representation of user input"""
         pass
