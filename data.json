@@ -3,13 +3,10 @@
         "welcome_msg": "Console anime welcomes you",
         "main_menu": {
             "1": ["Display recent anime", ["season", "list_view"]],
-            "2": ["Search", "search_view"],
+            "2": ["Search", ["", "search_view"]],
             "3": ["Recomendations", "reco"],
             "4": ["Display My Watchlist", "list_view"],
             "exit": ["Exit console", ["", "exit"]]
-        },
-        "season_menu": {
-            "1" : "View more enter index: "
         },
 
         "list_view": {
@@ -26,7 +23,7 @@
     },
 
     "endpoint" : {
-        "base_url" : "https://kitsu.io/api/edge"
+        "kitsu_api_base_url" : "https://kitsu.io/api/edge"
     },
 
     "seasons" : {

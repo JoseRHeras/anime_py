@@ -1,5 +1,4 @@
 import json
-import datetime
 
 from os import system
 from typing import Dict, List

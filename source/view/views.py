@@ -1,8 +1,6 @@
-from abc import ABC
 import json
-from source.model.data_models import Show
 from source.view.view import View
-from typing import Any, Dict, List, Tuple
+from typing import Dict, List
 from source.utilities import build_string_from_dict
 
 with open("data.json", 'r') as f:
@@ -120,8 +118,37 @@ class DetailedView(View):
     
     def available_options(self) -> Dict:
         return {}
+
     
+class SearchView(View):
+
+    def __init__(self) -> None:
+        self.view_conten: List = ["Search Box: ", "Type the anime you want to search or \'Enter exit to go back to previous \'",]
+
+    def _content_to_string(self):
+        return "".join([f"{line}\n" for line in self.view_conten])
+    
+    def update_view(self, content: List) -> None:
+        pass
+
+    def make_screen(self) -> str:
+        return self._content_to_string()
+
+    def get_user_input(self) -> List[str]:
         
+        while True:
+            usr_input = input("Anime Name: ")
+
+            if usr_input == "exit": return ["_", "exit"]
+            
+            if len(usr_input) > 0: return [str(usr_input), "search_query_list_view"]
+
+            print("Invalid input! Please try again")
+
+    def available_options(self) -> Dict:
+        """ Returns valid inputs for the following view """
+        return {}
+
 
 # View factory function
 def construct_view(type: str) -> View:
@@ -129,6 +156,8 @@ def construct_view(type: str) -> View:
     views = {
         "main" : MainMenuView(),
         "list_view" : ListView(),
-        "detailed_view": DetailedView()
+        "detailed_view": DetailedView(),
+        "search_view": SearchView(),
+        "search_query_list_view": ListView()
     }
     return views[type]

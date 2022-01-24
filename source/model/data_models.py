@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from turtle import title
+from email.mime import image
 from typing import Dict, List
 
 @dataclass
@@ -26,7 +26,7 @@ class Show:
             f"Image Link: {self.image}"]
 
 
-def parse_to_show_object(data: Dict) -> Show:
+def parse_to_show_object(data:Dict) -> Show:
     return Show(
         title_id=data["id"], 
         links=data["links"]["self"], 
@@ -35,4 +35,3 @@ def parse_to_show_object(data: Dict) -> Show:
         canonical_title=data["attributes"]["canonicalTitle"],
         image=data["attributes"]["posterImage"]["original"]
     )
-        

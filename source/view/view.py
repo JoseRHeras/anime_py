@@ -20,5 +20,5 @@ class View(ABC):
 
     @abstractmethod
     def get_user_input(self) -> List[str]:
-        """ Returns a tupple"""
+        """ Returns a list representation of user input"""
         pass

@@ -27,6 +27,10 @@ class AnimeLibrary:
         data = data.list_representation()
         return data
 
+    def animes_by_search_term(self,term:str) -> List:
+        data = self.api.get_animes_by_searchtearm(term=term)
+        return extract_title_and_id_from_data(data=data)
+
 
 def extract_title_and_id_from_data(data: List[Show]) -> List:
     return [[x.title_id, x.canonical_title] for x in data]  

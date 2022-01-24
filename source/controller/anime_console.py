@@ -52,7 +52,6 @@ class Console:
             self.update_state_with_next_view(usr_input)
         
 
-
 class ViewMemory:
 
     def __init__(self) -> None:
